@@ -1,6 +1,6 @@
 "use strict";
 
-app.factory("PintFBCalls", function($q, $http, FBCreds) {
+app.factory("BoardsFactory", function($q, $http, FBCreds) {
 
 // get a list of boards for that user (uid)
 	let getBoards = (userID) => {
@@ -8,19 +8,6 @@ app.factory("PintFBCalls", function($q, $http, FBCreds) {
 			$http.get(`${FBCreds.databaseURL}/boards.json?orderBy="uid"&equalTo="${userID}"`)
 			.then((returnedBoards) => {
 				resolve(returnedBoards);
-			})
-			.catch((error) => {
-				reject(error);
-			});
-		});
-	};
-
-// get a list of pins that are on one particular board
-	let getPinsOnBoard = (boardID) => {
-		return $q((resolve, reject) => {
-			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardid"&equalTo="${boardID}"`)
-			.then((returnedPins) => {
-				resolve(returnedPins);
 			})
 			.catch((error) => {
 				reject(error);
@@ -42,11 +29,9 @@ app.factory("PintFBCalls", function($q, $http, FBCreds) {
 		});
 	};
 
-// create a pin within the pins object on FB
-	let createPin = (pinObj) => {
+	let deleteBoard = (boardID) => {
 		return $q((resolve, reject) => {
-			$http.post(`${FBCreds.databaseURL}/pins.json`,
-			JSON.stringify(pinObj))
+			$http.delete(`${FBCreds.databaseURL}/boards/${boardID}.json`)
 			.then((result) => {
 				resolve(result);
 			})
@@ -56,13 +41,13 @@ app.factory("PintFBCalls", function($q, $http, FBCreds) {
 		});
 	};
 
-// create a user within the users object on FB
-	let createUser = (userObj) => {
+// allows users to update their board names in firebase
+	let updateBoard = (boardID, boardObj) => {
 		return $q((resolve, reject) => {
-			$http.post(`${FBCreds.databaseURL}/users.json`,
-			JSON.stringify(userObj))
-			.then((result) => {
-				resolve(result);
+			$http.patch(`${FBCreds.databaseURL}/boards/${boardID}.json`,
+			angular.toJson(boardObj))
+			.then((success) => {
+				resolve(success);
 			})
 			.catch((error) => {
 				reject(error);
@@ -70,9 +55,10 @@ app.factory("PintFBCalls", function($q, $http, FBCreds) {
 		});
 	};
 
-	return {getBoards, getPinsOnBoard, createBoard, createPin, createUser};
+	return {getBoards, createBoard, deleteBoard, updateBoard};
 
 });
+
 
 
 

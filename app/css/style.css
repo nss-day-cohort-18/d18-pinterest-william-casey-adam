@@ -1,4 +1,4 @@
-.row {
+.rowBrowse {
  -moz-column-width: 18em;
  -webkit-column-width: 18em;
  -moz-column-gap: 1em;
@@ -6,13 +6,13 @@
   
 }
 
-.item {
+.itemBrowse {
  display: inline-block;
  padding:  .25rem;
  width:  100%; 
 }
 
-.well {
+.wellBrowse {
  position:relative;
  display: block;
 }
