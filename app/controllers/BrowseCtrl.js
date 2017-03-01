@@ -4,7 +4,7 @@ app.controller("BrowseCtrl", function($scope, $location, PinsFactory) {
 
 console.log("Loaded a blank BrowseCtrl.js :D");
 
-		$scope.pins;
+		
 
 		PinsFactory.browsePins()
 			.then(function(returnedPins){
@@ -13,6 +13,6 @@ console.log("Loaded a blank BrowseCtrl.js :D");
 				console.log('$scope.pins:', $scope.pins);
 			});
 
-			
+
 
 });
