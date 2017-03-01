@@ -45,7 +45,7 @@ app.config(function($routeProvider) {
 		resolve: {isAuth}
 	}).
 	when("/browse/savepin", {
-		templateUrl: "partials/save.pin",
+		templateUrl: "partials/save.pin.html",
 		controller: "BrowseCtrl",
 		resolve: {isAuth}
 	}).
