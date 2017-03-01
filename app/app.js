@@ -36,11 +36,11 @@ app.run(($location, FBCreds) => {
 app.config(function($routeProvider) {
 	$routeProvider.
 	when("/", {
-		templateUrl: "partials/login.html",
-		controller: "LoginCtl"
+		templateUrl: "partials/Login.html",
+		controller: "LoginCtrl"
 	}).
 	when("/browse", {
-		templateUrl: "partials/browse.html",
+		templateUrl: "partials/Browse.html",
 		controller: "BrowseCtrl",
 		resolve: {isAuth}
 	}).
@@ -55,7 +55,7 @@ app.config(function($routeProvider) {
 		resove: {isAuth}
 	}).
 	when("/profile/:uid", {
-		templateUrl: "partials/profile.html",
+		templateUrl: "partials/Profile.html",
 		controller: "ProfileCtrl",
 		resolve: {isAuth}
 	}).
