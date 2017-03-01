@@ -5,7 +5,7 @@ let app = angular.module("Pinterest", ["ngRoute"]);
 
 // checking if authorized inorder to see different routes in routeprovider below 
 //     (in app.config under 'resolve: {Auth}')
-let Auth = (AuthorizeFactory) => new Promise ( (resolve, reject) => {
+let isAuth = (AuthorizeFactory) => new Promise ( (resolve, reject) => {
 	// remember to idenfity 'isAuthenticated' correctly in your factory
 	AuthorizeFactory.isAuthenticated()
 	.then ( (userExists) => {
@@ -35,11 +35,41 @@ app.run(($location, FBCreds) => {
 // displaying different routing available with which partial and controller assigned to them
 app.config(function($routeProvider) {
 	$routeProvider.
-	when('/', {
-		templateUrl: "partials/list.html",
-		controller: 'HomePageCtrl'
+	when("/", {
+		templateUrl: "partials/login.html",
+		controller: "LoginCtl"
 	}).
-	otherwise('/');
+	when("/browse", {
+		templateUrl: "partials/browse.html",
+		controller: "BrowseCtrl",
+		resolve: {isAuth}
+	}).
+	when("/browse/savepin", {
+		templateUrl: "partials/save.pin",
+		controller: "BrowseCtrl",
+		resolve: {isAuth}
+	}).
+	when("/browse/savepin/newboard", {
+		templateUrl: "partials/new.board.html",
+		controller: "BrowseCtrl",
+		resove: {isAuth}
+	}).
+	when("/profile/:uid", {
+		templateUrl: "partials/profile.html",
+		controller: "ProfileCtrl",
+		resolve: {isAuth}
+	}).
+	when("/profile/uid/newboard", {
+		templateUrl: "partials/new.board.html",
+		controller: "ProfileCtrl",
+		resolve: {isAuth}
+	}).
+	when("/profile/:uid/newpin", {
+		templateUrl: "partials/new.pin.html",
+		controller: "ProfileCtrl",
+		resolve: {isAuth}
+	}).
+	otherwise("/");
 });
 
 
