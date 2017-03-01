@@ -59,7 +59,7 @@ app.config(function($routeProvider) {
 		controller: "ProfileCtrl",
 		resolve: {isAuth}
 	}).
-	when("/profile/uid/newboard", {
+	when("/profile/:uid/newboard", {
 		templateUrl: "partials/new.board.html",
 		controller: "ProfileCtrl",
 		resolve: {isAuth}
