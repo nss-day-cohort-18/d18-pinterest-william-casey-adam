@@ -2,17 +2,23 @@
  -moz-column-width: 18em;
  -webkit-column-width: 18em;
  -moz-column-gap: 1em;
- -webkit-column-gap:1em; 
-  
+ -webkit-column-gap:1em;
+
 }
 
 .itemBrowse {
  display: inline-block;
  padding:  .25rem;
- width:  100%; 
+ width:  100%;
 }
 
 .wellBrowse {
  position:relative;
  display: block;
+}
+
+/*setting max image size in browse pins*/
+
+.pin-image {
+    max-width: 200px;
 }
