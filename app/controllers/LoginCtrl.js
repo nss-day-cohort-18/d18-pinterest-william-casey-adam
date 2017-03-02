@@ -8,4 +8,7 @@ app.controller("LoginCtrl", function($scope, $location, $window, AuthorizeFactor
 		$window.location.href = "#!/browse";
 	};
 
+
 });
+
+
