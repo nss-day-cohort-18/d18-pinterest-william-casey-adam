@@ -16,8 +16,9 @@ app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeF
     $scope.addPin = function() {
         let currentUser = AuthorizeFactory.getUser();
         console.log('currentUser in addPin = ', currentUser);
-        $scope.pin.useruid = currentUser;
+        $scope.pin.uid = currentUser;
         console.log("Saving pin: ", $scope.pin);
+        PinsFactory.createPin($scope.pin);
         $scope.pin = {};
     };
 });
