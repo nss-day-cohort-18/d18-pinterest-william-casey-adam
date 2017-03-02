@@ -8,7 +8,7 @@ app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeF
 	PinsFactory.browsePins()
 	.then(function(returnedPins){
 		console.log('returnedPins:', returnedPins);
-		$scope.pins = returnedPins.data;
+		$scope.pins = returnedPins;
 		console.log('$scope.pins:', $scope.pins);
 	});
 
