@@ -6,13 +6,13 @@
 			  	<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}">
 			    <h4>{{pin.title}}</h4>
 			    <p class="pin-description" >{{pin.description}}</p>
-			    <a id="{{pin.uid}}" class="btn btn-primary" data-toggle="modal" data-target="#pinThisModal">PIN THIS</a>
+			    <a id="{{pin.uid}}" class="btn btn-primary" data-toggle="modal" data-target="#pinThisModal" ng-click="getPinInfo(pin)">PIN THIS</a>
 			</div>
       	</div>
     </div>
 </div>
 
-<div class="modal fade" id="pinThisModal" role="dialog">
+<div class="modal fade" id="pinThisModal" role="dialog" ng=model="pin">
 	<div class="modal-dialog">
 		<!-- Pins Modal content-->
 		<div class="modal-content">
@@ -26,13 +26,13 @@
 			    <i class="fa fa-coffee"></i>
 			    When you are done click <strong>"Save"</strong> or click <strong>"Close"</strong> to exit.
 			</div>
-			<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}">
+			<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}"><br>
 			<label>Pin Title:</label>
-			<input class="form-control" type="text" ng-model="{{pin.title}}"><br>
+			<input class="form-control" type="text" value="{{pin.title}}" ng-model="pin.title">><br>
 			<label>Pin Description:</label>
-			<input class="form-control" type="text" ng-model="{{pin.description}}"><br>
+			<input class="form-control" type="text" value="{{pin.description}}" ng-model="pin.description"><br>
 			<label>Board Name:</label>
-			<input class="form-control" type="text" ng-model="pin.boardid">
+			<input class="form-control" type="text" value="" ng-model="pin.boardid">
 		</div>
 		<div class="modal-footer">
 		<button type="button" class="btn btn-default" ng-click="addPin()" data-dismiss="modal">Save</button>
