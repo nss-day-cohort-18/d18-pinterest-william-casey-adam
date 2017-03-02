@@ -15,3 +15,8 @@
  position:relative;
  display: block;
 }
+
+.pinList {
+	max-height: 100px;
+	max-width: 100px;
+}
