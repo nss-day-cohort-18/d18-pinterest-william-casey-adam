@@ -4,6 +4,7 @@ app.controller("ProfileCtrl", function($scope, $location, UserFactory, BoardsFac
 
 // get current userId (fb name) &  uid to store values for update
 	let currentUser = AuthorizeFactory.getUser();
+	let currentUserObj = AuthorizeFactory.getUserObj();
 	let currentUserId;
 	$scope.fbUser = {};
 	$scope.pin = {};
@@ -24,10 +25,10 @@ app.controller("ProfileCtrl", function($scope, $location, UserFactory, BoardsFac
 				return;
 			}
 		}
-		console.log("didn't find user so making a new one");
-		let newObj = {};
-		newObj.uid = currentUser;
-		UserFactory.createNewUser(newObj);
+		let nameArray = currentUserObj.displayName.split(" ");
+		$scope.fbUser.firstName = nameArray[0];
+		$scope.fbUser.lastName = nameArray[1];
+		$scope.fbUser.uid = currentUser;
 	});
 
 // button toggles to show tabs at bottom of profile page

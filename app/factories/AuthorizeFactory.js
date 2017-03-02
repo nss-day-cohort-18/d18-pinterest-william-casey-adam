@@ -4,6 +4,7 @@ app.factory("AuthorizeFactory", function() {
 
 // set the initial value of currentUser to be changed after login
 	let currentUser = null;
+	let currentUserObj = null;
 
 // will update currentUser to prevent certain routes if user doesn't exist.
 // is called within app.js
@@ -12,6 +13,7 @@ app.factory("AuthorizeFactory", function() {
 			firebase.auth().onAuthStateChanged( (user) => {
 				if (user) {
 					currentUser = user.uid;
+					currentUserObj = user;
 					resolve(true);
 				} else {
 					resolve(false);
@@ -24,6 +26,10 @@ app.factory("AuthorizeFactory", function() {
 	let getUser = function() {
 		console.log("Current User: ", currentUser);
 		return currentUser;
+	};
+
+	let getUserObj = function () {
+		return currentUserObj;
 	};
 
 	let logoutUser = function() {
@@ -39,7 +45,7 @@ app.factory("AuthorizeFactory", function() {
 		return firebase.auth().signInWithPopup(provider);
 	};
 
-	return {isAuthenticated, getUser, authWithProvider, logoutUser};
+	return {isAuthenticated, getUser, getUserObj, authWithProvider, logoutUser};
 
 });
 
