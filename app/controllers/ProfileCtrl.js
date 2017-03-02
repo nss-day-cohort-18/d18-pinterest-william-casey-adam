@@ -6,6 +6,7 @@ app.controller("ProfileCtrl", function($scope, $location, UserFactory, BoardsFac
 	let currentUser = AuthorizeFactory.getUser();
 	let currentUserObj = AuthorizeFactory.getUserObj();
 	let currentUserId;
+	let userExists = false;
 	$scope.fbUser = {};
 	$scope.pin = {};
 	$scope.board = {};
@@ -22,9 +23,11 @@ app.controller("ProfileCtrl", function($scope, $location, UserFactory, BoardsFac
 				$scope.fbUser.firstName = userArray[i].firstName;
 				$scope.fbUser.userName = userArray[i].userName;
 				$scope.fbUser.id = userArray[i].id;
+				userExists = true;
 				return;
 			}
 		}
+		userExists = false;
 		let nameArray = currentUserObj.displayName.split(" ");
 		$scope.fbUser.firstName = nameArray[0];
 		$scope.fbUser.lastName = nameArray[1];
@@ -50,7 +53,14 @@ app.controller("ProfileCtrl", function($scope, $location, UserFactory, BoardsFac
 // allow users to save changes they have made to their profile
 	$scope.updateProfile = () => {
 		console.log("User Object to update FB: ", $scope.fbUser);
-		UserFactory.updateUser(currentUserId, $scope.fbUser);
+		if (userExists === true) {
+			UserFactory.updateUser(currentUserId, $scope.fbUser);
+		} else if (userExists === false) {
+			UserFactory.createNewUser($scope.fbUser)
+			.then(function (result) {
+				$scope.$apply();
+			});
+		}
 	};
 
 // allow users to create a new pin

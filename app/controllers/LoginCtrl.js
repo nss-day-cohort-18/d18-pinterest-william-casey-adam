@@ -4,8 +4,8 @@ app.controller("LoginCtrl", function($scope, $location, $window, AuthorizeFactor
 
 	$scope.login = function() {
 		console.log("login function");
-		AuthorizeFactory.authWithProvider();
 		$window.location.href = "#!/browse";
+		AuthorizeFactory.authWithProvider();
 	};
 
 
