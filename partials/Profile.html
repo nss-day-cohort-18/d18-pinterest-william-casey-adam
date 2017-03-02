@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-4 col-sm-6 col-xs12">
             <div class="text-center">
-                <img class="avatar img-circle img-thumbnail" src="../default-pic.jpg" alt="Profile Pic">
+                <img class="avatar img-circle img-thumbnail" src="{{fbUser.url}}" alt="Profile Pic">
                 <input type="file" class="center-block well well-sm">
             </div>
         </div>
@@ -16,31 +16,33 @@
           <h3>Personal info</h3>
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label class="col-lg-3 control-label">First name:</label>
-              <div class="col-lg-8">
-                <input class="form-control" value="BA" type="text">
+              <label class="col-lg-2 control-label">First name:</label>
+              <div class="col-lg-10">
+                <input class="form-control" ng-model="fbUser.firstName" type="text" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-lg-3 control-label">Last name:</label>
-              <div class="col-lg-8">
-                <input class="form-control" value="MF" type="text">
+              <label class="col-lg-2 control-label">Last name:</label>
+              <div class="col-lg-10">
+                <input class="form-control" ng-model="fbUser.lastName" type="text" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-lg-3 control-label">User Name:</label>
-              <div class="col-lg-8">
-                <input class="form-control" value="Potato" type="text">
+              <label class="col-lg-2 control-label">User Name:</label>
+              <div class="col-lg-10">
+                <input class="form-control" ng-model="fbUser.userName" type="text" />
               </div>
             </div>
             <div class="form-group">
-              <div class="col-md-8">
-                <input class="btn btn-primary" value="Save Changes" type="button">
+              <div class="col-md-10">
+                <input class="btn btn-primary" value="Save Changes" type="button" ng-click="updateProfile()">
               </div>
             </div>
+          </form>
         </div>
         <br>
 
+        <!-- Boards and Pins Tab at the bottom -->
          <div class="ui-tab">
             <ul class="nav nav-tabs">
                <li class="active"><a class="btn btn-primary" data-toggle="tab" id="boardsBtn">Boards</a></li>
@@ -48,15 +50,72 @@
             </ul>
             
             <div class="tab-content">
-                <div class="tab-pane fade in active" id="tab1">
+                <div class="tab-pane fade in active" ng-click="boards()" id="tab1">
                   <h3>List of Boards</h3>
+                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boardsModal">Create New Board</button>
                 </div>
-                <div class="tab-pane fade in" id="tab2">
+                <div class="tab-pane fade in" ng-click="pins()" id="tab2">
                   <h3>List of Pins</h3>
+                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pinsModal">Create New Pin</button>
                 </div>
+
+              <!-- Pins Modal -->
+              <div class="modal fade" id="pinsModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Pins Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">New Pin Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info alert-dismissable">
+                            <a class="panel-close close" data-dismiss="alert">×</a> 
+                            <i class="fa fa-coffee"></i>
+                            When you are done click <strong>"Save"</strong> or click <strong>"Close"</strong> to exit.
+                        </div>
+                      <label>Pin Title:</label>
+                      <input class="form-control" type="text" ng-model="pin.title"><br>
+                      <label>Pin Description:</label>
+                      <input class="form-control" type="text" ng-model="pin.description"><br>
+                      <label>Image URL:</label>
+                      <input class="form-control" type="text" ng-model="pin.imageurl">
+                    </div>
+                    <div class="modal-footer">
+                     <button type="button" class="btn btn-default" ng-click="createNewPin()" data-dismiss="modal">Save</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Boards Modal -->
+              <div class="modal fade" id="boardsModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Boards Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">New Board Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info alert-dismissable">
+                            <a class="panel-close close" data-dismiss="alert">×</a> 
+                            <i class="fa fa-coffee"></i>
+                            When you are done click <strong>"Save"</strong> or click <strong>"Close"</strong> to exit.
+                        </div>
+                      <label>Name Your Board</label>
+                      <input class="form-control" type="text" ng-model="board.name">
+                    </div>
+                    <div class="modal-footer">
+                     <button type="button" class="btn btn-default" ng-click="createNewBoard()" data-dismiss="modal">Save</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
         </div>
-
     </div>
-
 </div>
