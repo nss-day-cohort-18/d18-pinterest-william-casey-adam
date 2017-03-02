@@ -5,7 +5,7 @@ let app = angular.module("Pinterest", ["ngRoute"]);
 
 // checking if authorized inorder to see different routes in routeprovider below 
 //     (in app.config under 'resolve: {Auth}')
-let isAuth = (AuthorizeFactory) => new Promise ( (resolve, reject) => {
+let isAuth = (AuthorizeFactory, $location) => new Promise ( (resolve, reject) => {
 	// remember to idenfity 'isAuthenticated' correctly in your factory
 	AuthorizeFactory.isAuthenticated()
 	.then ( (userExists) => {
@@ -14,10 +14,13 @@ let isAuth = (AuthorizeFactory) => new Promise ( (resolve, reject) => {
 			resolve();
 		} else {
 			console.log("You are not Authenticated");
+			$location.path("/login")
 			reject();
 		}
 	});
 });
+
+
 
 // passing in FBCreds inorder to hide the values from the public
 // remember to include the file with the values in .gitignore

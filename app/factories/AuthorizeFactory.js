@@ -1,6 +1,6 @@
 "use strict";
 
-app.factory("AuthorizeFactory", function() {
+app.factory("AuthorizeFactory", function($window) {
 
 // set the initial value of currentUser to be changed after login
 	let currentUser = null;
