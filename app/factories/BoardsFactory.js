@@ -7,7 +7,13 @@ app.factory("BoardsFactory", function($q, $http, FBCreds) {
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/boards.json?orderBy="uid"&equalTo="${userID}"`)
 			.then((returnedBoards) => {
-				resolve(returnedBoards);
+				let boardsArray = returnedBoards.data;
+				let boards = [];
+				Object.keys(boardsArray).forEach((each) => {
+					boardsArray[each].id = each;
+					boards.push(boardsArray[each]);
+				});
+				resolve(boards);
 			})
 			.catch((error) => {
 				reject(error);
@@ -21,6 +27,7 @@ app.factory("BoardsFactory", function($q, $http, FBCreds) {
 			$http.post(`${FBCreds.databaseURL}/boards.json`,
 			JSON.stringify(boardObj))
 			.then((result) => {
+				console.log("just pushed up board");
 				resolve(result);
 			})
 			.catch((error) => {

@@ -48,15 +48,25 @@
                <li class="active"><a class="btn btn-primary" data-toggle="tab" id="boardsBtn">Boards</a></li>
                <li class=""><a class="btn btn-primary" data-toggle="tab" id="pinsBtn">Pins </a></li>
             </ul>
-            
+
+<!-- tabs of boards and pins with content -->
             <div class="tab-content">
-                <div class="tab-pane fade in active" ng-click="boards()" id="tab1">
+                <div class="tab-pane fade in active" id="tab1">
                   <h3>List of Boards</h3>
                   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boardsModal">Create New Board</button>
+<!-- listing boards from FB -->
+                    <div class="btn-group" ng-repeat="each in boards">
+                         <a class="btn btn-primary btn-lg">{{each.title}}</a>
+                    </div>
+
                 </div>
-                <div class="tab-pane fade in" ng-click="pins()" id="tab2">
+                <div class="tab-pane fade in" id="tab2">
                   <h3>List of Pins</h3>
                   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pinsModal">Create New Pin</button>
+<!-- listing pins from FB -->
+                    <div class="btn-group" ng-repeat="each in pins">
+                         <img class="pinList" ng-src="{{each.imageurl}}" alt="image here">
+                    </div>
                 </div>
 
               <!-- Pins Modal -->
@@ -74,6 +84,10 @@
                             <i class="fa fa-coffee"></i>
                             When you are done click <strong>"Save"</strong> or click <strong>"Close"</strong> to exit.
                         </div>
+                        <label>Pick a Board:</label><br>
+                        <div class="btn-group" ng-repeat="each in boards">
+                            <a ng-click="updateNewPin(each.id)" class="btn btn-primary">{{each.title}}</a>
+                        </div><br><strong>Board Selected:</strong> {{pin.boardid}}<br>
                       <label>Pin Title:</label>
                       <input class="form-control" type="text" ng-model="pin.title"><br>
                       <label>Pin Description:</label>
@@ -82,7 +96,7 @@
                       <input class="form-control" type="text" ng-model="pin.imageurl">
                     </div>
                     <div class="modal-footer">
-                     <button type="button" class="btn btn-default" ng-click="createNewPin()" data-dismiss="modal">Save</button>
+                     <button type="button" class="btn btn-default" ng-click="createNewPin()">Save</button>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                   </div>
@@ -105,7 +119,7 @@
                             When you are done click <strong>"Save"</strong> or click <strong>"Close"</strong> to exit.
                         </div>
                       <label>Name Your Board</label>
-                      <input class="form-control" type="text" ng-model="board.name">
+                      <input class="form-control" type="text" ng-model="board.title">
                     </div>
                     <div class="modal-footer">
                      <button type="button" class="btn btn-default" ng-click="createNewBoard()" data-dismiss="modal">Save</button>

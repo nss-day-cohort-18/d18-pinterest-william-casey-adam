@@ -18,6 +18,11 @@
  display: block;
 }
 
+
+.pinList {
+	max-height: 100px;
+	max-width: 100px;
+
 /*setting max image size in browse pins*/
 
 .pin-image {
