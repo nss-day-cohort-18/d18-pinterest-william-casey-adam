@@ -22,6 +22,8 @@ app.factory("AuthorizeFactory", function() {
 		});
 	};
 
+	
+
 // allows other controllers/factories to retrieve the current user.
 	let getUser = function() {
 		console.log("Current User: ", currentUser);
