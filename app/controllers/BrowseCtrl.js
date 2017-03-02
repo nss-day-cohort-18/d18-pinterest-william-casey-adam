@@ -15,8 +15,7 @@ console.log("Loaded a blank BrowseCtrl.js :D");
 			.then(function(returnedPins){
 				console.log('returnedPins:', returnedPins);
 				angular.forEach(returnedPins.data, function(pin){
-					$scope.pins.push(pin);
-					
+					$scope.pins.push(pin);	
 				});
 				 console.log('$scope.pins:', $scope.pins);
 			});
