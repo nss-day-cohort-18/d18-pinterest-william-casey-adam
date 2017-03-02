@@ -1,7 +1,7 @@
 <!--  just a proof of concept here where column doesn't care about image size but will fill the space with the image and text and not look odd -->
 <div class="container">
 	<div class="row rowBrowse">
-	    <div class="item itemBrowse" ng-repeat="pin in pins">
+	    <div class="item itemBrowse" ng-repeat="pin in pins | filter:  SearchText.search">
 	      	<div class="well text-center wellBrowse">
 			  	<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}">
 			    <h4>{{pin.title}}</h4>

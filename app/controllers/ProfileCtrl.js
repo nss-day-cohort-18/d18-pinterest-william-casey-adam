@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("ProfileCtrl", function($scope, $location, UserFactory, BoardsFactory, PinsFactory, AuthorizeFactory) {
+app.controller("ProfileCtrl", function($scope, $location, $window, UserFactory, BoardsFactory, PinsFactory, AuthorizeFactory) {
 
 // get current userId (fb name) &  uid to store values for update
 	let currentUser = AuthorizeFactory.getUser();
@@ -58,7 +58,7 @@ app.controller("ProfileCtrl", function($scope, $location, UserFactory, BoardsFac
 		} else if (userExists === false) {
 			UserFactory.createNewUser($scope.fbUser)
 			.then(function (result) {
-				$scope.$apply();
+				$window.location.reload(false);
 			});
 		}
 	};
