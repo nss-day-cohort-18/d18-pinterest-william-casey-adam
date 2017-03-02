@@ -7,7 +7,13 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardid"&equalTo="defaultPins"`)
 			.then((returnedPins) => {
-				resolve(returnedPins);
+				let pinsArray = returnedPins.data;
+				let pins = [];
+				Object.keys(pinsArray).forEach((each) => {
+					pinsArray[each].id = each;
+					pins.push(pinsArray[each]);
+				});
+				resolve(pins);
 			})
 			.catch((error) => {
 				reject(error);
@@ -19,7 +25,13 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="title"&equalTo="${titleOfPin}"`)
 			.then((returnedPins) => {
-				resolve(returnedPins);
+				let pinsArray = returnedPins.data;
+				let pins = [];
+				Object.keys(pinsArray).forEach((each) => {
+					pinsArray[each].id = each;
+					pins.push(pinsArray[each]);
+				});
+				resolve(pins);
 			})
 			.catch((error) => {
 				reject(error);
