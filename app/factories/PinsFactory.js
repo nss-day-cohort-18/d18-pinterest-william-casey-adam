@@ -14,6 +14,7 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 					pins.push(pinsArray[each]);
 				});
 				resolve(pins);
+
 			})
 			.catch((error) => {
 				reject(error);
@@ -81,7 +82,7 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 	let createPin = (pinObj) => {
 		return $q((resolve, reject) => {
 			$http.post(`${FBCreds.databaseURL}/pins.json`,
-			JSON.stringify(pinObj))
+			angular.toJson(pinObj))
 			.then((result) => {
 				resolve(result);
 			})

@@ -2,6 +2,7 @@
 
 app.controller("UserCtrl", function($q, $http, FBCreds) {
 
+
 // create a user within the users object on FB
 	let createUser = (userObj) => {
 		return $q((resolve, reject) => {
