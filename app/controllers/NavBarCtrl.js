@@ -35,4 +35,5 @@ app.controller("NavBarCtrl", function($scope, $window, $location, AuthorizeFacto
 		$window.location.url = "#!/profile/{{$scope.uid}}";
 	};
 
+
 });
