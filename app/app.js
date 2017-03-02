@@ -14,7 +14,7 @@ let isAuth = (AuthorizeFactory, $location) => new Promise ( (resolve, reject) =>
 			resolve();
 		} else {
 			console.log("You are not Authenticated");
-			$location.path("/login")
+			$location.path("/login");
 			reject();
 		}
 	});
