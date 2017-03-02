@@ -9,7 +9,7 @@ console.log("Loaded a blank BrowseCtrl.js :D");
 		PinsFactory.browsePins()
 			.then(function(returnedPins){
 				console.log('returnedPins:', returnedPins);
-				$scope.pins = returnedPins.data;
+				$scope.pins = returnedPins;
 				console.log('$scope.pins:', $scope.pins);
 			});
 

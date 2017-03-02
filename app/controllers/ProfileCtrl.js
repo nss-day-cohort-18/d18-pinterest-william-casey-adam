@@ -83,7 +83,12 @@ app.controller("ProfileCtrl", function($scope, $location, $window, UserFactory, 
 
 // allow users to create a new pin
 	$scope.createNewPin = function() {
+		if ($scope.pin.boardid === undefined) {
+			alert("Please select a board");
+			return;
+		}
 		console.log("Clicked to make a new pin of: ", $scope.pin);
+		console.log("boardid?", $scope.pin.boardid);
 		PinsFactory.createPin($scope.pin).
 		then(function(blah) {
 			$window.location.reload(false);
