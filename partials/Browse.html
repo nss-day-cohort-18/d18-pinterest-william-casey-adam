@@ -1,79 +1,45 @@
 <!--  just a proof of concept here where column doesn't care about image size but will fill the space with the image and text and not look odd -->
 <div class="container">
 	<div class="row rowBrowse">
-	    <!-- <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div>
-      <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div>
-      <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div>
-      <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div>
-      <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div>
-      <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p></p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div>
-      <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div>
-      <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div>
-      <div class="item itemBrowse">
-	      <div class="well text-center wellBrowse"> 
-					  <img class="card-img-top" src="..." alt="Card image cap">
-					    <h4>Card title</h4>
-					    <p></p>
-					    <a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-      </div> -->
+	    <div class="item itemBrowse" ng-repeat="pin in pins | filter:  SearchText.search">
+	      	<div class="well text-center wellBrowse">
+			  	<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}">
+			    <h4>{{pin.title}}</h4>
+			    <p class="pin-description" >{{pin.description}}</p>
+			    <a id="{{pin.uid}}" class="btn btn-primary" data-toggle="modal" data-target="#pinThisModal" ng-click="getPinInfo(pin)">PIN THIS</a>
+			</div>
+      	</div>
     </div>
+</div>
+
+<div class="modal fade" id="pinThisModal" role="dialog" ng=model="pin">
+	<div class="modal-dialog">
+		<!-- Pins Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add To A Board</h4>
+			</div>
+		<div class="modal-body">
+			<div class="alert alert-info alert-dismissable">
+			    <a class="panel-close close" data-dismiss="alert">×</a>
+			    <i class="fa fa-coffee"></i>
+			    When you are done click <strong>"Save"</strong> or click <strong>"Close"</strong> to exit.
+			</div>
+			<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}"><br>
+			<label>Pin Title:</label>
+			<input class="form-control" type="text" value="{{pin.title}}" ng-model="pin.title">><br>
+			<label>Pin Description:</label>
+			<input class="form-control" type="text" value="{{pin.description}}" ng-model="pin.description"><br>
+			<label>Board Name:</label>
+			<input class="form-control" type="text" value="" ng-model="pin.boardid">
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" ng-click="addPin()" data-dismiss="modal">Save</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+		</div>
+	</div>
 </div>
 
 
