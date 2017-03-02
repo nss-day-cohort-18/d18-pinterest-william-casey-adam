@@ -1,7 +1,9 @@
 "use strict";
 
-app.controller("NavBarCtrl", function($scope, $window, $location, AuthorizeFactory) {
+app.controller("NavBarCtrl", function($scope, $window, $location, AuthorizeFactory, SearchFilter) {
 
+	$scope.SearchText = SearchFilter;
+	console.log('$scope.search in nav:', $scope.search);
 	$scope.isLoggedIn = false;
 	$scope.uid = null;
 
