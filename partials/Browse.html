@@ -2,14 +2,13 @@
 <div class="container">
 	<div class="row rowBrowse">
 	    <div class="item itemBrowse" ng-repeat="pin in pins">
-	      <div class="well text-center wellBrowse">
-					  <img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}">
-					    <h4>{{pin.title}}</h4>
-					    <p>{{pin.description}}</p>
-					    <a href="#" id="{{pin.uid}}" class="btn btn-primary">PIN THIS</a>
-				</div>
-      </div>
-
+	      	<div class="well text-center wellBrowse">
+			  	<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}">
+			    <h4>{{pin.title}}</h4>
+			    <p class="pin-description" >{{pin.description}}</p>
+			    <a href="#" id="{{pin.uid}}" class="btn btn-primary">PIN THIS</a>
+			</div>
+      	</div>
     </div>
 </div>
 

@@ -22,3 +22,9 @@
 .pin-image {
     max-width: 200px;
 }
+
+/*justify browse pin description*/
+
+.pin-description {
+    text-align: justify;
+}
