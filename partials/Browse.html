@@ -1,12 +1,12 @@
 <!--  just a proof of concept here where column doesn't care about image size but will fill the space with the image and text and not look odd -->
 <div class="container">
 	<div class="row rowBrowse">
-	    <div class="item itemBrowse" ng-repeat="pin in pins | filter:  SearchText.search">
+	    <div class="item itemBrowse" ng-repeat="each in pins | filter:  SearchText.search">
 	      	<div class="well text-center wellBrowse">
-			  	<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}">
-			    <h4>{{pin.title}}</h4>
-			    <p class="pin-description" >{{pin.description}}</p>
-			    <a id="{{pin.uid}}" class="btn btn-primary" data-toggle="modal" data-target="#pinThisModal" ng-click="getPinInfo(pin)">PIN THIS</a>
+			  	<img class="card-img-top pin-image" src="{{each.imageurl}}" alt="{{each.title}}">
+			    <h4>{{each.title}}</h4>
+			    <p class="pin-description" >{{each.description}}</p>
+			    <a id="{{each.uid}}" class="btn btn-primary" data-toggle="modal" data-target="#pinThisModal" ng-click="getPinInfo(each)">PIN THIS</a>
 			</div>
       	</div>
     </div>

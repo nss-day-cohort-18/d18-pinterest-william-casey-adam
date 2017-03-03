@@ -186,7 +186,11 @@ app.controller("ProfileCtrl", function($scope, $location, $window, UserFactory, 
 		then(function() {
 			loadPinInfo();
 		});
-		$scope.slctBrdPins.splice(pin, 1);
+		for (var i = 0; i < $scope.slctBrdPins.length; i++) {
+			if ($scope.slctBrdPins[i].id === pin.id) {
+				$scope.slctBrdPins.splice(i, 1);
+			}
+		}
 	};
 
 	$scope.removeNewPinAlert = () => {

@@ -5,6 +5,7 @@ app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeF
 
   $scope.pin = {};
   $scope.boards = [];
+  $scope.pins = [];
   let currentUser = AuthorizeFactory.getUser();
 
   BoardsFactory.getBoards(currentUser).
@@ -23,7 +24,7 @@ app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeF
         console.log('thisPin =', thisPin);
         $(".newBrowsePinAlert").hide();
         $scope.pin.boardid = undefined;
-        $scope.pin = thisPin;
+        Object.assign($scope.pin, thisPin);
         $scope.CurrentPinBoardDisplay = "";
     };
 
