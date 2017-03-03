@@ -1,15 +1,15 @@
 <nav class="navbar navbar-inverse" ng-controller="NavBarCtrl">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" ng-href="#!/browse">Pinterest</a>
+      <a class="navbar-brand" ng-click="show()" ng-href="#!/browse">Pinterest</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a ng-show="isLoggedIn" ng-href="#!/profile/{{uid}}">Profile</a></li>
-      <li><a ng-show="isLoggedIn" ng-click="logout()">LogOut</a></li>
+      <li><a ng-show="isLoggedIn" ng-click="hideSearch()" ng-href="#!/profile/{{uid}}">Profile</a></li>
+      <li><a ng-show="isLoggedIn" href="" ng-click="logout()">LogOut</a></li>
     </ul>
      	<div class="col-sm-3 col-md-3 navbar-right">
    				<form class="navbar-form" role="search">
-              <div class="input-group">
+              <div class="input-group" ng-show="showSearch">
                   <input type="text" class="form-control" placeholder="Search" ng-model="SearchText.search" ng-show="isLoggedIn">
                   <div class="input-group-btn">
                       <button class="btn btn-default" type="submit" ng-show="isLoggedIn"><i class="glyphicon glyphicon-search"></i></button>
