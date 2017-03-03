@@ -1,3 +1,13 @@
+* {
+	border-radius: 0 !important;
+}
+
+.avatar {
+	border-radius: 100% !important;
+}
+
+
+
 .rowBrowse {
  -moz-column-width: 18em;
  -webkit-column-width: 18em;
@@ -49,3 +59,14 @@
 .newBrowsePinAlert {
 	display: none;
 }
+
+.btn-group {
+	display: inline-block;
+	margin: 10px;
+}
+
+#profile-create-new-board-button {
+	margin:10px;
+}
+
+
