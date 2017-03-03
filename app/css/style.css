@@ -1,3 +1,8 @@
+* {
+	border-radius: 0 !important;
+}
+
+
 .rowBrowse {
  -moz-column-width: 18em;
  -webkit-column-width: 18em;
@@ -28,8 +33,11 @@
     max-width: 200px;
 }
 
-.profile-image {
-	max-width: 300px;
+.profile-image { 
+
+		max-width: 300px; 
+		max-height: 300px;
+		border-radius: 100% !important;
 }
 
 /*justify browse pin description*/
@@ -49,3 +57,14 @@
 .newBrowsePinAlert {
 	display: none;
 }
+
+.btn-group {
+	display: inline-block;
+	margin: 10px;
+}
+
+#profile-create-new-board-button {
+	margin:10px;
+}
+
+

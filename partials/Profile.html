@@ -56,9 +56,9 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="tab1">
                   <h3>List of Boards</h3>
-                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boardsModal">Create New Board</button>
+                  <button id="profile-create-new-board-button"type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boardsModal">Create New Board</button>
 <!-- listing boards from FB -->
-                    <div class="btn-group" ng-repeat="each in boards">
+                    <div id="profile-board-buttons"class="btn-group" ng-repeat="each in boards">
                          <a class="btn btn-primary btn-lg" ng-click="selectBoard(each)" data-toggle="modal" data-target="#SelectedBoardsModal">{{each.title}}</a>
                     </div>
 
@@ -68,7 +68,7 @@
                   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pinsModal" ng-click="removeNewPinAlert()">Create New Pin</button>
 <!-- listing pins from FB -->
                     <div class="btn-group" ng-repeat="each in pins">
-                         <button data-toggle="modal" data-target="#SelectedPinsModal" ng-click="selectPin(each)"><img class="pinList" ng-src="{{each.imageurl}}" alt="image here"></button>
+                         <button id="pin-image-button-profile" data-toggle="modal" data-target="#SelectedPinsModal" ng-click="selectPin(each)"><img class="pinList" ng-src="{{each.imageurl}}" alt="image here"></button>
                          
                     </div>
                 </div>
