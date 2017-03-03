@@ -104,6 +104,18 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 		});
 	};
 
+	let deletePinsOnBoard = (boardid) => {
+		return $q((resolve, reject) => {
+			$http.delete(`${FBCreds.databaseURL}/pins.json?orderBy="boardid"&equalTo="${boardid}"`)
+			.then((result) => {
+				resolve(result);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+		});
+	};
+
 // update the pin located on firebase
 	let updatePin = (pinID, updatedPin) => {
 		return $q((resolve, reject) => {
@@ -119,7 +131,7 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 	};
 
 
-	return {browsePins, getPinsOnBoard, searchForPin, getPinsForUser, createPin, deletePin, updatePin};
+	return {browsePins, deletePinsOnBoard, getPinsOnBoard, searchForPin, getPinsForUser, createPin, deletePin, updatePin};
 
 });
 

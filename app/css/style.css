@@ -28,8 +28,20 @@
     max-width: 200px;
 }
 
+.profile-image {
+	max-width: 300px;
+}
+
 /*justify browse pin description*/
 
 .pin-description {
     text-align: justify;
+}
+
+.delete-board-alert {
+	display: none;
+}
+
+.newPinAlert {
+	display: none;
 }

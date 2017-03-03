@@ -3,8 +3,11 @@
     <div class="row">
         <div class="col-md-4 col-sm-6 col-xs12">
             <div class="text-center">
-                <img class="avatar img-circle img-thumbnail" src="{{fbUser.url}}" alt="Profile Pic">
-                <input type="file" class="center-block well well-sm">
+                <img class="avatar img-circle img-thumbnail profile-image" src="{{fbUser.url}}" alt="Profile Pic"><br><br>
+                <label class="col-lg-2 control-label">Image URL:</label>
+                <div class="col-lg-3">
+                    <input ng-model="fbUser.url" type="text" />
+                </div>
             </div>
         </div>
         <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
@@ -56,16 +59,17 @@
                   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boardsModal">Create New Board</button>
 <!-- listing boards from FB -->
                     <div class="btn-group" ng-repeat="each in boards">
-                         <a class="btn btn-primary btn-lg">{{each.title}}</a>
+                         <a class="btn btn-primary btn-lg" ng-click="selectBoard(each)" data-toggle="modal" data-target="#SelectedBoardsModal">{{each.title}}</a>
                     </div>
 
                 </div>
                 <div class="tab-pane fade in" id="tab2">
                   <h3>List of Pins</h3>
-                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pinsModal">Create New Pin</button>
+                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pinsModal" ng-click="removeNewPinAlert()">Create New Pin</button>
 <!-- listing pins from FB -->
                     <div class="btn-group" ng-repeat="each in pins">
-                         <img class="pinList" ng-src="{{each.imageurl}}" alt="image here">
+                         <button data-toggle="modal" data-target="#SelectedPinsModal" ng-click="selectPin(each)"><img class="pinList" ng-src="{{each.imageurl}}" alt="image here"></button>
+                         
                     </div>
                 </div>
 
@@ -86,8 +90,9 @@
                         </div>
                         <label>Pick a Board:</label><br>
                         <div class="btn-group" ng-repeat="each in boards">
-                            <a ng-click="updateNewPin(each.id)" class="btn btn-primary">{{each.title}}</a>
-                        </div><br><strong>Board Selected:</strong> {{pin.boardid}}<br>
+                            <a ng-click="updateNewPin(each)" class="btn btn-primary">{{each.title}}</a>
+                        </div>
+                        <br><br><strong>Board Selected:</strong> {{NewPinBoardDisplay}}<br><br>
                       <label>Pin Title:</label>
                       <input class="form-control" type="text" ng-model="pin.title"><br>
                       <label>Pin Description:</label>
@@ -96,6 +101,12 @@
                       <input class="form-control" type="text" ng-model="pin.imageurl">
                     </div>
                     <div class="modal-footer">
+<!-- newpin alert -->
+                            <div class="newPinAlert alert alert-danger"> 
+                            <i class="fa fa-coffee"></i>
+                            <strong>Must Select A Board To Create A Pin.</strong>
+<!-- newpin alert -->
+                        </div>
                      <button type="button" class="btn btn-default" ng-click="createNewPin()">Save</button>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -129,7 +140,86 @@
                 </div>
               </div>
 
+                <!-- Selected Boards Modal -->
+              <div class="modal fade" id="SelectedBoardsModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Boards Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Edit Board Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info alert-dismissable">
+                            <a class="panel-close close" data-dismiss="alert">×</a> 
+                            <i class="fa fa-coffee"></i>
+                            When you are done click <strong>"Save Changes"</strong>or click <strong>"Delete"</strong> to delete or click <strong>"Close"</strong> to exit.
+                        </div>
+                      <label>Edit Board Name</label>
+                      <input class="form-control" type="text" ng-model="selectedBoard.title"><br>
+                        <div class="alert alert-warning alert-dismissable">
+                            <a class="panel-close close" data-dismiss="alert">×</a> 
+                            <i class="fa fa-coffee"></i>
+                            <strong>Click</strong> on a pin to delete it from the board.
+                        </div>
+                      <label>List of Pins</label><br>
+                        <div class="btn-group" ng-repeat="each in slctBrdPins">
+                            <img class="pinList" ng-click="deletePinOnBoard(each)" ng-src="{{each.imageurl}}" alt="image here">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="delete-board-alert alert alert-danger"> 
+                            <i class="fa fa-coffee"></i>
+                            <strong>Must delete all pins to delete a board.</strong>
+                        </div>
+                      <button type="button" class="btn btn-default" ng-click="editBoard(selectedBoard.id)" data-dismiss="modal">Save Changes</button>
+                      <button type="button" class="btn btn-default" ng-click="deleteBoard(selectedBoard.id)">Delete</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+<!-- Selected Pin Modal --><!-- Selected Pin Modal -->
+<!-- Selected Pin Modal --><!-- Selected Pin Modal -->
+              <div class="modal fade" id="SelectedPinsModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Pins Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Edit Pin Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info alert-dismissable">
+                            <a class="panel-close close" data-dismiss="alert">×</a> 
+                            <i class="fa fa-coffee"></i>
+                            When you are done click <strong>"Save Changes"</strong>or click <strong>"Delete"</strong> to delete or click <strong>"Close"</strong> to exit.
+                        </div>
+                        <label>Pick a Board:</label><br>
+                        <div class="btn-group" ng-repeat="each in boards">
+                            <a ng-click="updateSelectedPin(each)" class="btn btn-primary">{{each.title}}</a>
+                        </div>
+                        <br><br><strong>Board Selected:</strong> {{CurrentPinBoardDisplay}}<br><br>
+                      <label>Pin Title:</label>
+                      <input class="form-control" type="text" ng-model="selectedPin.title"><br>
+                      <label>Pin Description:</label>
+                      <input class="form-control" type="text" ng-model="selectedPin.description"><br>
+                      <label>Image URL:</label>
+                      <input class="form-control" type="text" ng-model="selectedPin.imageurl">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" ng-click="editPin(selectedPin.id)" data-dismiss="modal">Save Changes</button>
+                      <button type="button" class="btn btn-default" ng-click="deletePin(selectedPin.id)">Delete</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
             </div>
         </div>
-    </div>
+    </div><br><br><br><br><br>
 </div>
