@@ -32,7 +32,7 @@
 			<label>Pin Description:</label>
 			<input class="form-control" type="text" value="{{pin.description}}" ng-model="pin.description"><br>
         <div class="btn-group" ng-repeat="each in boards">
-            <a ng-click="updateNewPin(each)" class="btn btn-primary">{{each.title}}</a>
+            <a ng-click="updateSelectedPin(each)" class="btn btn-primary">{{each.title}}</a>
         </div>
         <br><br><strong>Board Selected:</strong> {{CurrentPinBoardDisplay}}<br>
 		</div>
