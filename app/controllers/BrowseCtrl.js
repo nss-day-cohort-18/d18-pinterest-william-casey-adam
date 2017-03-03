@@ -21,7 +21,10 @@ app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeF
 
     $scope.getPinInfo = function (thisPin) {
         console.log('thisPin =', thisPin);
+        $(".newBrowsePinAlert").hide();
+        $scope.pin.boardid = undefined;
         $scope.pin = thisPin;
+        $scope.CurrentPinBoardDisplay = "";
     };
 
     $scope.addPin = function() {
