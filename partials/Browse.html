@@ -28,14 +28,20 @@
 			</div>
 			<img class="card-img-top pin-image" src="{{pin.imageurl}}" alt="{{pin.title}}"><br>
 			<label>Pin Title:</label>
-			<input class="form-control" type="text" value="{{pin.title}}" ng-model="pin.title">><br>
+			<input class="form-control" type="text" value="{{pin.title}}" ng-model="pin.title"><br>
 			<label>Pin Description:</label>
 			<input class="form-control" type="text" value="{{pin.description}}" ng-model="pin.description"><br>
-			<label>Board Name:</label>
-			<input class="form-control" type="text" value="" ng-model="pin.boardid">
+        <div class="btn-group" ng-repeat="each in boards">
+            <a ng-click="updateSelectedPin(each)" class="btn btn-primary">{{each.title}}</a>
+        </div>
+        <br><br><strong>Board Selected:</strong> {{CurrentPinBoardDisplay}}<br>
 		</div>
 		<div class="modal-footer">
-		<button type="button" class="btn btn-default" ng-click="addPin()" data-dismiss="modal">Save</button>
+			<div class="newBrowsePinAlert alert alert-danger"> 
+        <i class="fa fa-coffee"></i>
+        <strong>Must Select A Board To Create A Pin.</strong>
+      </div>
+		<button type="button" class="btn btn-default" ng-click="addPin()">Save</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
 		</div>

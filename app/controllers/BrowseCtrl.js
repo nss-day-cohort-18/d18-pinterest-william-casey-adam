@@ -1,9 +1,16 @@
 "use strict";
 
 
-app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeFactory) {
+app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeFactory, BoardsFactory) {
 
-    $scope.pin = {};
+  $scope.pin = {};
+  $scope.boards = [];
+  let currentUser = AuthorizeFactory.getUser();
+
+  BoardsFactory.getBoards(currentUser).
+  then(function(boards) {
+  	$scope.boards = boards;
+  });
 
 	PinsFactory.browsePins()
 	.then(function(returnedPins){
@@ -18,11 +25,20 @@ app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeF
     };
 
     $scope.addPin = function() {
-        let currentUser = AuthorizeFactory.getUser();
-        console.log('currentUser in addPin = ', currentUser);
-        $scope.pin.uid = currentUser;
-        console.log("Saving pin: ", $scope.pin);
-        PinsFactory.createPin($scope.pin);
-        $scope.pin = {};
+    	if ($scope.pin.boardid === undefined) {
+				$(".newBrowsePinAlert").hide().show('medium');
+				return;
+			}
+      console.log('currentUser in addPin = ', currentUser);
+      $scope.pin.uid = currentUser;
+      console.log("Saving pin: ", $scope.pin);
+      PinsFactory.createPin($scope.pin);
+      $('#pinThisModal').modal('hide');
+      $scope.pin = {};
+    };
+
+    $scope.updateSelectedPin = (board) => {
+    	$scope.pin.boardid = board.id;
+			$scope.CurrentPinBoardDisplay = board.title;
     };
 });

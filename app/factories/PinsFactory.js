@@ -5,7 +5,7 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 // grab the defaultPins boardId pins on the firebase object
 	let browsePins = () => {
 		return $q((resolve, reject) => {
-			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardid"&equalTo="defaultPins"`)
+			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="uid"&equalTo="000"`)
 			.then((returnedPins) => {
 				let pinsArray = returnedPins.data;
 				let pins = [];

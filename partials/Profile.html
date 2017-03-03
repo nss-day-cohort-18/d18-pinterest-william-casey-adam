@@ -105,8 +105,8 @@
                             <div class="newPinAlert alert alert-danger"> 
                             <i class="fa fa-coffee"></i>
                             <strong>Must Select A Board To Create A Pin.</strong>
+                            </div>
 <!-- newpin alert -->
-                        </div>
                      <button type="button" class="btn btn-default" ng-click="createNewPin()">Save</button>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -205,12 +205,15 @@
                       <input class="form-control" type="text" ng-model="selectedPin.title"><br>
                       <label>Pin Description:</label>
                       <input class="form-control" type="text" ng-model="selectedPin.description"><br>
+                      <div class="text-center">
+                        <img class="card-img-top pin-image" src="{{selectedPin.imageurl}}" alt="{{selectedPin.title}}">
+                      </div><br>
                       <label>Image URL:</label>
                       <input class="form-control" type="text" ng-model="selectedPin.imageurl">
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" ng-click="editPin(selectedPin.id)" data-dismiss="modal">Save Changes</button>
-                      <button type="button" class="btn btn-default" ng-click="deletePin(selectedPin.id)">Delete</button>
+                      <button type="button" class="btn btn-default" ng-click="deletePin(selectedPin.id)" data-dismiss="modal">Delete</button>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                   </div>
