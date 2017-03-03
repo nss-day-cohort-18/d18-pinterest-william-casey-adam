@@ -18,14 +18,34 @@
  display: block;
 }
 
+.pinList {
+	max-height: 100px;
+	max-width: 100px;
+}
 /*setting max image size in browse pins*/
 
 .pin-image {
     max-width: 200px;
 }
 
+.profile-image {
+	max-width: 300px;
+}
+
 /*justify browse pin description*/
 
 .pin-description {
     text-align: justify;
+}
+
+.delete-board-alert {
+	display: none;
+}
+
+.newPinAlert {
+	display: none;
+}
+
+.newBrowsePinAlert {
+	display: none;
 }

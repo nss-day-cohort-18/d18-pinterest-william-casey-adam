@@ -5,15 +5,15 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 // grab the defaultPins boardId pins on the firebase object
 	let browsePins = () => {
 		return $q((resolve, reject) => {
-			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardid"&equalTo="defaultPins"`)
+			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="uid"&equalTo="000"`)
 			.then((returnedPins) => {
 				let pinsArray = returnedPins.data;
-                let pins = [];
-                Object.keys(pinsArray).forEach((each) => {
-                    pinsArray[each].id = each;
-                    pins.push(pinsArray[each]);
-                });
-                resolve(pins);
+				let pins = [];
+				Object.keys(pinsArray).forEach((each) => {
+					pinsArray[each].id = each;
+					pins.push(pinsArray[each]);
+				});
+				resolve(pins);
 			})
 			.catch((error) => {
 				reject(error);
@@ -25,7 +25,13 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="title"&equalTo="${titleOfPin}"`)
 			.then((returnedPins) => {
-				resolve(returnedPins);
+				let pinsArray = returnedPins.data;
+				let pins = [];
+				Object.keys(pinsArray).forEach((each) => {
+					pinsArray[each].id = each;
+					pins.push(pinsArray[each]);
+				});
+				resolve(pins);
 			})
 			.catch((error) => {
 				reject(error);
@@ -38,7 +44,13 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="uid"&equalTo="${userID}"`)
 			.then((returnedPins) => {
-				resolve(returnedPins);
+				let pinsArray = returnedPins.data;
+				let pins = [];
+				Object.keys(pinsArray).forEach((each) => {
+					pinsArray[each].id = each;
+					pins.push(pinsArray[each]);
+				});
+				resolve(pins);
 			})
 			.catch((error) => {
 				reject(error);
@@ -51,7 +63,13 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 		return $q((resolve, reject) => {
 			$http.get(`${FBCreds.databaseURL}/pins.json?orderBy="boardid"&equalTo="${boardID}"`)
 			.then((returnedPins) => {
-				resolve(returnedPins);
+				let pinsArray = returnedPins.data;
+				let pins = [];
+				Object.keys(pinsArray).forEach((each) => {
+					pinsArray[each].id = each;
+					pins.push(pinsArray[each]);
+				});
+				resolve(pins);
 			})
 			.catch((error) => {
 				reject(error);
@@ -86,6 +104,18 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 		});
 	};
 
+	let deletePinsOnBoard = (boardid) => {
+		return $q((resolve, reject) => {
+			$http.delete(`${FBCreds.databaseURL}/pins.json?orderBy="boardid"&equalTo="${boardid}"`)
+			.then((result) => {
+				resolve(result);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+		});
+	};
+
 // update the pin located on firebase
 	let updatePin = (pinID, updatedPin) => {
 		return $q((resolve, reject) => {
@@ -101,7 +131,7 @@ app.factory("PinsFactory", function($q, $http, FBCreds) {
 	};
 
 
-	return {browsePins, getPinsOnBoard, searchForPin, getPinsForUser, createPin, deletePin, updatePin};
+	return {browsePins, deletePinsOnBoard, getPinsOnBoard, searchForPin, getPinsForUser, createPin, deletePin, updatePin};
 
 });
 
