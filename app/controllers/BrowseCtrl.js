@@ -1,8 +1,9 @@
 "use strict";
 
 
-app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeFactory, BoardsFactory) {
+app.controller("BrowseCtrl", function($scope, $location, PinsFactory, AuthorizeFactory, BoardsFactory, SearchFilter) {
 
+  $scope.SearchText = SearchFilter;
   $scope.pin = {};
   $scope.boards = [];
   $scope.pins = [];
